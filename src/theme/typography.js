@@ -1,0 +1,38 @@
+export const fontSizes = {
+  xxs: 10,
+  xs: 12,
+  sm: 14,
+  md: 16,
+  lg: 18,
+  xl: 20,
+  xxl: 24,
+  xxxl: 30,
+  displaySm: 36,
+  displayMd: 48,
+  displayLg: 60,
+  displayXl: 72,
+};
+
+export const fontWeights = {
+  thin: '100',
+  extraLight: '200',
+  light: '300',
+  regular: '400',
+  medium: '500',
+  semiBold: '600',
+  bold: '700',
+  extraBold: '800',
+  black: '900',
+};
+export const fontFamilies = {
+  inter: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  roboto: "'Roboto', 'Helvetica Neue', Arial, sans-serif",
+  openSans: "'Open Sans', Arial, sans-serif",
+  lato: "'Lato', Arial, sans-serif",
+  poppins: "'Poppins', 'Inter', sans-serif",
+  montserrat: "'Montserrat', Arial, sans-serif",
+  nunito: "'Nunito', Arial, sans-serif",
+  sourceSans: "'Source Sans 3', Arial, sans-serif",
+  playfair: "'Playfair Display', Georgia, serif",
+  firaCode: "'Fira Code', 'Courier New', monospace",
+};
