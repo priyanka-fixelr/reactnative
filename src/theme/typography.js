@@ -12,7 +12,6 @@ export const fontSizes = {
   displayLg: 60,
   displayXl: 72,
 };
-
 export const fontWeights = {
   thin: '100',
   extraLight: '200',

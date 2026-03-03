@@ -1,11 +1,11 @@
 import { lightColors, darkColors } from './colors';
-import { fontSizes, fontWeights,fontFamilies } from './typography';
+import { fontSizes, fontWeights, fontFamilies } from './typography';
 import { spacing } from './spacing';
 
 export const lightTheme = {
   colors: lightColors,
   fontSizes,
-  fontFamilies,     
+  fontFamilies,
   fontWeights,
   spacing,
 };

@@ -1,14 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from './src/context/ThemeContext';
-import { AppNavigator } from './src/navigation/AppNavigator';
+import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <ThemeProvider>
+    <ThemeProvider>
+      <NavigationContainer>
         <AppNavigator />
-      </ThemeProvider>
-    </View>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
