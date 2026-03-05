@@ -2,9 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
+import { useNavigation } from '@react-navigation/native';
 import AppHeader from '../components/common/AppHeader';
 const HomeScreen = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const navigation = useNavigation();
 
   return (
     <View>
@@ -14,9 +16,7 @@ const HomeScreen = () => {
         rightText="Edit"
         onRightPress={() => console.log('Edit pressed')}
       />
-      <View
-        style={[styles.container, { backgroundColor: theme.colors.background }]}
-      >
+      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
         <Text style={[styles.title, { color: theme.colors.text }]}>
           Welcome to React Native Boiler
         </Text>
@@ -27,6 +27,9 @@ const HomeScreen = () => {
           <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
             Toggle Theme
           </Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={{ marginTop: 20 }}>
+          <Text style={{ color: theme.colors.primary, fontSize: 16 }}>Go to Profile</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -7,7 +7,7 @@ import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
-export const AppNavigator = () => {
+export default function AppNavigator() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
@@ -15,7 +15,7 @@ export const AppNavigator = () => {
           <Stack.Screen
             name="Home"
             component={HomeScreen}
-            options={{ title: 'React Native Boiler' }}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
