@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../redux/slices/authSlice';
 import { ThemeContext } from '../context/ThemeContext';
 import AppForm from '../components/common/AppForm';
 import AppTextInput from '../components/common/AppTextInput';
@@ -12,6 +14,7 @@ import { ERROR_MESSAGES } from '../constants';
 
 const LoginScreen = ({ navigation }) => {
     const { theme } = useContext(ThemeContext);
+    const dispatch = useDispatch();
 
     // Auth hook containing our API service logic
     const { login, isLoading } = useAuth();
@@ -42,6 +45,9 @@ const LoginScreen = ({ navigation }) => {
         const response = await login(name, password);
 
         if (response.success) {
+            // Store credentials in Redux
+            dispatch(loginAction({ username: name, password }));
+
             triggerToast('Login Successful!', 'success');
             // Adding a small delay to let the user see the success toast before navigating
             setTimeout(() => {

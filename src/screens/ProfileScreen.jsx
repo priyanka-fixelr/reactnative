@@ -1,12 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { ThemeContext } from '../context/ThemeContext';
 import AppHeader from '../components/common/AppHeader';
-const HomeScreen = () => {
+
+const ProfileScreen = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const { username } = useSelector((state) => state.auth);
+
   return (
-    <View>
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <AppHeader
         title="Profile"
         showBack={true}
@@ -14,18 +18,26 @@ const HomeScreen = () => {
         onRightPress={() => console.log('Edit pressed')}
       />
 
-
-      <TouchableOpacity onPress={toggleTheme}>
-        <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
-          Toggle Theme
+      <View style={styles.content}>
+        <Text style={[styles.title, { color: theme.colors.text }]}>
+          Welcome, {username || 'Guest'}!
         </Text>
-      </TouchableOpacity>
 
+        <TouchableOpacity onPress={toggleTheme} style={styles.button}>
+          <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
+            Toggle Theme
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -34,11 +46,10 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
     marginBottom: 20,
+  },
+  button: {
+    marginTop: 10,
   },
   themeButton: {
     fontSize: 16,
@@ -46,4 +57,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default ProfileScreen;
