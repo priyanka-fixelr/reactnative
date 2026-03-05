@@ -25,10 +25,10 @@ const SplashScreen = ({ navigation }) => {
             }),
         ]).start();
 
-        // Navigate to Main Stack after delay
+        // Navigate to Login Stack after delay
         const timer = setTimeout(() => {
-            navigation.replace('Main');
-        }, 1500); // 2.5 seconds delay
+            navigation.replace('Login');
+        }, 1500); // 1.5 seconds delay
 
         // Cleanup timer on unmount
         return () => clearTimeout(timer);

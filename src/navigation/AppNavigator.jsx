@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import DrawerNavigator from './DrawerNavigator';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import SplashScreen from '../screens/SplashScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,11 @@ export default function AppNavigator() {
           <Stack.Screen
             name="Splash"
             component={SplashScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
