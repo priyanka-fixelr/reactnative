@@ -1,33 +1,55 @@
 import React, { useContext, useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import { ThemeContext } from '../context/ThemeContext';
 import AppForm from '../components/common/AppForm';
 import AppTextInput from '../components/common/AppTextInput';
 import AppButton from '../components/common/AppButton';
 import Toast from '../components/common/Toast';
 
+import { useAuth } from '../hooks/useAuth';
+import { validateName, validatePassword } from '../utils/validation';
+import { ERROR_MESSAGES } from '../constants';
+
 const LoginScreen = ({ navigation }) => {
     const { theme } = useContext(ThemeContext);
+
+    // Auth hook containing our API service logic
+    const { login, isLoading } = useAuth();
+
+    // Form state
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+
+    // Toast state
     const [toastMessage, setToastMessage] = useState('');
     const [showToast, setShowToast] = useState(false);
     const [toastType, setToastType] = useState('success');
 
-    const handleLogin = () => {
-        if (name && password) {
-            setToastMessage('Login Successful!');
-            setToastType('success');
-            setShowToast(true);
+    const triggerToast = (msg, type) => {
+        setToastMessage(msg);
+        setToastType(type);
+        setShowToast(true);
+    };
 
+    const handleLogin = async () => {
+        // Run validations from our utils module
+        if (!validateName(name) || !validatePassword(password)) {
+            triggerToast(ERROR_MESSAGES.VALIDATION_ERROR, 'error');
+            return;
+        }
+
+        // Execute API call via our custom hook
+        const response = await login(name, password);
+
+        if (response.success) {
+            triggerToast('Login Successful!', 'success');
             // Adding a small delay to let the user see the success toast before navigating
             setTimeout(() => {
                 navigation.replace('Main');
             }, 1000);
         } else {
-            setToastMessage('Please enter both name and password.');
-            setToastType('error');
-            setShowToast(true);
+            // Display error messages triggered from the API hook
+            triggerToast(response.error, 'error');
         }
     };
 
@@ -42,18 +64,24 @@ const LoginScreen = ({ navigation }) => {
                         placeholder="Enter your name"
                         value={name}
                         onChangeText={setName}
+                        editable={!isLoading}
                     />
 
                     <AppTextInput
                         label="Password"
-                        placeholder="Enter your password"
+                        placeholder="Enter your password (min 4 chars)"
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry
+                        editable={!isLoading}
                     />
 
                     <View style={styles.buttonContainer}>
-                        <AppButton title="Login" onPress={handleLogin} />
+                        {isLoading ? (
+                            <ActivityIndicator size="large" color={theme.colors.primary} />
+                        ) : (
+                            <AppButton title="Login" onPress={handleLogin} />
+                        )}
                     </View>
                 </View>
             </AppForm>
@@ -88,6 +116,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 20,
+        minHeight: 50, // keeps layout stable when switching from button to spinner
+        justifyContent: 'center'
     }
 });
 
