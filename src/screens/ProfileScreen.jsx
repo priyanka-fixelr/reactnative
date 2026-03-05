@@ -6,23 +6,21 @@ import AppHeader from '../components/common/AppHeader';
 const HomeScreen = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
+    <View>
       <AppHeader
         title="Profile"
         showBack={true}
         rightText="Edit"
         onRightPress={() => console.log('Edit pressed')}
       />
-      <Text style={[styles.title, { color: theme.colors.text }]}>
-        Welcome to Profile Page
-      </Text>
+
+
       <TouchableOpacity onPress={toggleTheme}>
         <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
           Toggle Theme
         </Text>
       </TouchableOpacity>
+
     </View>
   );
 };

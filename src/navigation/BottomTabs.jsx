@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { useTheme } from '../context/ThemeContext';
@@ -15,8 +15,8 @@ export default function BottomTabs() {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarIcon: ({ color, size }) => {
-          const iconName = route.name === 'Home' ? 'home' : 'person';
-          return <Ionicons name={iconName} size={size} color={color} />;
+          const icon = route.name === 'Home' ? '🏠' : '👤';
+          return <Text style={{ fontSize: 24 }}>{icon}</Text>;
         },
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.textSecondary,

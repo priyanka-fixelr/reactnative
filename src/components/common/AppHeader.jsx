@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ThemeContext } from '../../context/ThemeContext';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
 
 const AppHeader = ({ title, showBack = false, rightText, onRightPress }) => {
   const { theme } = useContext(ThemeContext);
@@ -10,10 +10,16 @@ const AppHeader = ({ title, showBack = false, rightText, onRightPress }) => {
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <View style={styles.sideContainer}>
-        {showBack && (
+        {showBack ? (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={[styles.backButton, { color: theme.colors.primary, fontWeight: 'bold' }]}>
               {'<--'}
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+            <Text style={[styles.backButton, { color: theme.colors.primary, fontWeight: 'bold' }]}>
+              Menu
             </Text>
           </TouchableOpacity>
         )}

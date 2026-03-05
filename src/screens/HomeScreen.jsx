@@ -12,26 +12,15 @@ const HomeScreen = () => {
     <View>
       <AppHeader
         title="Home"
-        showBack={true}
+        showBack={false}
         rightText="Edit"
         onRightPress={() => console.log('Edit pressed')}
       />
-      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-        <Text style={[styles.title, { color: theme.colors.text }]}>
-          Welcome to React Native Boiler
-        </Text>
-        <Text style={[styles.subtitle, { color: theme.colors.textSecondary }]}>
-          Your app is working!
-        </Text>
         <TouchableOpacity onPress={toggleTheme}>
           <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
             Toggle Theme
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={{ marginTop: 20 }}>
-          <Text style={{ color: theme.colors.primary, fontSize: 16 }}>Go to Profile</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
