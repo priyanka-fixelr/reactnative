@@ -7,7 +7,6 @@ import AppHeader from '../components/common/AppHeader';
 const HomeScreen = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const navigation = useNavigation();
-
   return (
     <View>
       <AppHeader
@@ -16,11 +15,17 @@ const HomeScreen = () => {
         rightText="Edit"
         onRightPress={() => console.log('Edit pressed')}
       />
-        <TouchableOpacity onPress={toggleTheme}>
-          <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
-            Toggle Theme
-          </Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={toggleTheme}>
+        <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
+          Toggle Theme
+        </Text>
+
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("NotFound")}>
+        <Text style={[styles.themeButton, { color: theme.colors.primary }]}>
+          Go to Not Found
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

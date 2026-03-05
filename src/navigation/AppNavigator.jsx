@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import DrawerNavigator from './DrawerNavigator';
+import NotFoundScreen from '../screens/NotFoundScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,6 +15,11 @@ export default function AppNavigator() {
           <Stack.Screen
             name="Main"
             component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="NotFound"
+            component={NotFoundScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
